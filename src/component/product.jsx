@@ -1,19 +1,58 @@
-import React from "react";
-
-// Add your + and - image URLs
-const minusImage = "path/to/minus-image.png"; // Replace with actual path
-const plusImage = "path/to/plus-image.png"; // Replace with actual path
+import { useState } from "react";
+import Thumbnail from "./thumbnail";
 
 const Product = () => {
+  const [activeImage, setActiveImage] = useState("");
+
+  const handleThumbnailClick = (src) => {
+    setActiveImage(src);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-20 pt-28 px-4 mx-auto max-w-6xl">
       {/* Product Image */}
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
+        {/* Product Image */}
         <img
-          src="assets/images/image-product-1.jpg"
+          src={activeImage || "assets/images/image-product-1.jpg"}
           alt="Product 1"
-          className="w-full h-auto object-cover rounded-lg shadow-lg"
+          className="w-full h-auto object-cover rounded-lg shadow-lg mb-6"
         />
+        {/* Thumbnails */}
+        <div className="flex justify-between mt-4 w-full">
+          <Thumbnail
+            src="assets/images/image-product-1-thumbnail.jpg"
+            alt="Thumbnail 1"
+            isActive={activeImage === "assets/images/image-product-1.jpg"}
+            onClick={() =>
+              handleThumbnailClick("assets/images/image-product-1.jpg")
+            }
+          />
+          <Thumbnail
+            src="assets/images/image-product-2-thumbnail.jpg"
+            alt="Thumbnail 2"
+            isActive={activeImage === "assets/images/image-product-2.jpg"}
+            onClick={() =>
+              handleThumbnailClick("assets/images/image-product-2.jpg")
+            }
+          />
+          <Thumbnail
+            src="assets/images/image-product-3-thumbnail.jpg"
+            alt="Thumbnail 3"
+            isActive={activeImage === "assets/images/image-product-3.jpg"}
+            onClick={() =>
+              handleThumbnailClick("assets/images/image-product-3.jpg")
+            }
+          />
+          <Thumbnail
+            src="assets/images/image-product-4-thumbnail.jpg"
+            alt="Thumbnail 4"
+            isActive={activeImage === "assets/images/image-product-4.jpg"}
+            onClick={() =>
+              handleThumbnailClick("assets/images/image-product-4.jpg")
+            }
+          />
+        </div>
       </div>
 
       {/* Product Description */}
