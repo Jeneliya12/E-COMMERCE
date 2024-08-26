@@ -1,8 +1,32 @@
 import { useState } from "react";
 import Thumbnail from "./thumbnail";
+import AddToCart from "./addtocart";
 
 const Product = () => {
   const [activeImage, setActiveImage] = useState("");
+
+  const thumbnails = [
+    {
+      thumbnailSrc: "assets/images/image-product-1-thumbnail.jpg",
+      fullSizeSrc: "assets/images/image-product-1.jpg",
+      alt: "Thumbnail 1",
+    },
+    {
+      thumbnailSrc: "assets/images/image-product-2-thumbnail.jpg",
+      fullSizeSrc: "assets/images/image-product-2.jpg",
+      alt: "Thumbnail 2",
+    },
+    {
+      thumbnailSrc: "assets/images/image-product-3-thumbnail.jpg",
+      fullSizeSrc: "assets/images/image-product-3.jpg",
+      alt: "Thumbnail 3",
+    },
+    {
+      thumbnailSrc: "assets/images/image-product-4-thumbnail.jpg",
+      fullSizeSrc: "assets/images/image-product-4.jpg",
+      alt: "Thumbnail 4",
+    },
+  ];
 
   const handleThumbnailClick = (src) => {
     setActiveImage(src);
@@ -20,38 +44,15 @@ const Product = () => {
         />
         {/* Thumbnails */}
         <div className="flex justify-between mt-4 w-full">
-          <Thumbnail
-            src="assets/images/image-product-1-thumbnail.jpg"
-            alt="Thumbnail 1"
-            isActive={activeImage === "assets/images/image-product-1.jpg"}
-            onClick={() =>
-              handleThumbnailClick("assets/images/image-product-1.jpg")
-            }
-          />
-          <Thumbnail
-            src="assets/images/image-product-2-thumbnail.jpg"
-            alt="Thumbnail 2"
-            isActive={activeImage === "assets/images/image-product-2.jpg"}
-            onClick={() =>
-              handleThumbnailClick("assets/images/image-product-2.jpg")
-            }
-          />
-          <Thumbnail
-            src="assets/images/image-product-3-thumbnail.jpg"
-            alt="Thumbnail 3"
-            isActive={activeImage === "assets/images/image-product-3.jpg"}
-            onClick={() =>
-              handleThumbnailClick("assets/images/image-product-3.jpg")
-            }
-          />
-          <Thumbnail
-            src="assets/images/image-product-4-thumbnail.jpg"
-            alt="Thumbnail 4"
-            isActive={activeImage === "assets/images/image-product-4.jpg"}
-            onClick={() =>
-              handleThumbnailClick("assets/images/image-product-4.jpg")
-            }
-          />
+          {thumbnails.map((thumbnail, index) => (
+            <Thumbnail
+              key={index}
+              src={thumbnail.thumbnailSrc}
+              alt={thumbnail.alt}
+              isActive={activeImage === thumbnail.fullSizeSrc}
+              onClick={() => handleThumbnailClick(thumbnail.fullSizeSrc)}
+            />
+          ))}
         </div>
       </div>
 
@@ -72,34 +73,7 @@ const Product = () => {
             $250.00
           </p>
         </div>
-
-        {/* Quantity and Add to Cart */}
-        <div className="flex items-center space-x-4">
-          {/* Quantity Controls */}
-          <div className="flex items-center border border-gray-300 rounded-lg">
-            <button className="flex items-center justify-center px-4 py-2 border-r border-gray-300 hover:bg-gray-200">
-              <img
-                src="assets/images/icon-minus.svg"
-                alt="Decrease"
-                className="w-4 h-4"
-              />
-            </button>
-            <span className="px-4 py-2 text-gray-800">1</span>
-            <button className="flex items-center justify-center px-4 py-2 border-l border-gray-300 hover:bg-gray-200">
-              <img
-                src="assets/images/icon-plus.svg"
-                alt="Increase"
-                className="w-4 h-4"
-              />
-            </button>
-          </div>
-
-          {/* Add to Cart Button */}
-          <button className="flex items-center bg-orange text-black py-4 px-16 rounded-lg">
-            <img src="assets/images/icon-cart.svg" className="pr-4" />
-            Add to Cart
-          </button>
-        </div>
+        <AddToCart />
       </div>
     </div>
   );
