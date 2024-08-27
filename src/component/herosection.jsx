@@ -94,6 +94,102 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Currently Popular Items Section */}
+      <section className="container mx-auto mt-10">
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Currently Popular Items
+        </h2>
+
+        {/* Categories */}
+        <div className="flex space-x-8 mb-8 justify-center">
+          <button className="text-lg font-semibold text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900">
+            New
+          </button>
+          <button className="text-lg font-semibold text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900">
+            Featured
+          </button>
+          <button className="text-lg font-semibold text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900">
+            Best Seller
+          </button>
+        </div>
+
+        {/* Product Images */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-4">
+          {/* Product 1 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-1.jpg"
+              alt="New Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          {/* Product 2 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-2.jpg"
+              alt="Featured Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          {/* Product 3 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-3.jpg"
+              alt="Best Seller Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          {/* Product 4 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-3.jpg"
+              alt="Best Seller Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Product 1 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-1.jpg"
+              alt="New Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          {/* Product 2 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-2.jpg"
+              alt="Featured Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          {/* Product 3 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-3.jpg"
+              alt="Best Seller Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          {/* Product 4 */}
+          <div className="relative">
+            <img
+              src="assets/images/image-product-3.jpg"
+              alt="Best Seller Product"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
     </section>
   );
 };
