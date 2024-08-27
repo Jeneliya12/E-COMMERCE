@@ -1,10 +1,15 @@
 import Header from "../component/header";
-import Product from "../component/product";
+import HeroSection from "../component/herosection";
+// import Product from "../component/product";
+import { CartProvider } from "../component/context/cartcontext";
 function Home() {
   return (
     <>
-      <Header />
-      <Product />
+      <CartProvider>
+        <Header />
+        <HeroSection />
+        {/* <Product /> */}
+      </CartProvider>
     </>
   );
 }
