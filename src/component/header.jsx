@@ -1,8 +1,17 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./context/cartcontext";
+import { useUserContext } from "./context/usercontext";
 
 const Header = () => {
   const { isCartEmpty, isCartMessageVisible, handleCartClick } = useCart();
+  const { user, handleLogout } = useUserContext(); // Access user and logout function from context
+
+  // State to manage visibility of the logout button
+  const [showLogout, setShowLogout] = useState(false);
+
+  // Toggle visibility of the logout button
+  const toggleLogout = () => setShowLogout((prev) => !prev);
 
   return (
     <nav className="bg-white border-b border-gray-300 py-4 px-6">
@@ -52,12 +61,36 @@ const Header = () => {
 
         {/* User Image and Cart Icon */}
         <div className="flex items-center space-x-4 ml-auto">
-          <Link to="/login" className="text-gray-600 hover:text-gray-900">
-            Login
-          </Link>
-          <Link to="/register" className="text-gray-600 hover:text-gray-900">
-            Register
-          </Link>
+          {user ? (
+            <div className="relative flex flex-col items-center">
+              <span
+                className="text-gray-600 cursor-pointer"
+                onClick={toggleLogout} // Toggle the logout button visibility
+              >
+                {user.firstname}
+              </span>
+              {showLogout && (
+                <button
+                  onClick={handleLogout}
+                  className="text-gray-600 hover:text-gray-900 mt-2"
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="text-gray-600 hover:text-gray-900">
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="text-gray-600 hover:text-gray-900"
+              >
+                Register
+              </Link>
+            </>
+          )}
           <a
             href="#cart"
             onClick={(e) => {
