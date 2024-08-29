@@ -1,24 +1,27 @@
+import { Link } from "react-router-dom";
 import { useCart } from "./context/cartcontext";
+
 const Header = () => {
   const { isCartEmpty, isCartMessageVisible, handleCartClick } = useCart();
+
   return (
     <nav className="bg-white border-b border-gray-300 py-4 px-6">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <a href="/">
+        <Link to="/">
           <img
             src="assets/images/logo1.png" // Replace with your logo URL
             alt="Logo"
             className="h-14 mr-6" // Adjust height as needed
           />
-        </a>
+        </Link>
 
         {/* Navigation Links */}
         <ul className="flex flex-grow space-x-8 mx-4">
           <li>
-            <a href="/" className="text-gray-600 hover:text-gray-900">
+            <Link to="/" className="text-gray-600 hover:text-gray-900">
               Home
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#shop" className="text-gray-600 hover:text-gray-900">
@@ -49,6 +52,12 @@ const Header = () => {
 
         {/* User Image and Cart Icon */}
         <div className="flex items-center space-x-4 ml-auto">
+          <Link to="/login" className="text-gray-600 hover:text-gray-900">
+            Login
+          </Link>
+          <Link to="/register" className="text-gray-600 hover:text-gray-900">
+            Register
+          </Link>
           <a
             href="#cart"
             onClick={(e) => {
