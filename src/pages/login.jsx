@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { base_url } from "../utils/base-url"; // Import the base URL
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "./context/usercontext"; // Custom context for user data
+import { useUserContext } from "../context/usercontext"; // Custom context for user data
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,13 +16,10 @@ const Login = () => {
     setError(""); // Clear any previous errors
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/user/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${base_url}user/login`, {
+        email,
+        password,
+      });
       const userData = response.data;
       setUser(userData); // Set user data in context
       navigate("/"); // Redirect to home page

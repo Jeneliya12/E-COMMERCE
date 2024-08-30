@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./component/header";
-import HeroSection from "./component/herosection";
-import Login from "./component/login";
-import Register from "./component/register";
-import { UserProvider } from "./component/context/usercontext";
-import { CartProvider } from "./component/context/cartcontext";
+import Header from "./pages/header";
+import HeroSection from "./pages/herosection";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import { UserProvider } from "./context/usercontext";
+import { CartProvider } from "./context/cartcontext";
 function App() {
   return (
     <>

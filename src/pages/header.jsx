@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "./context/cartcontext";
-import { useUserContext } from "./context/usercontext";
+import { useCart } from "../context/cartcontext";
+import { useUserContext } from "../context/usercontext";
 
 const Header = () => {
   const { isCartEmpty, isCartMessageVisible, handleCartClick } = useCart();
