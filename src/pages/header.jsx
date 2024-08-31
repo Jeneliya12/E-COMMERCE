@@ -1,60 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/cartcontext";
 import { useUserContext } from "../context/usercontext";
+import { CartContext } from "../context/cartcontext";
 
 const Header = () => {
-  const { isCartEmpty, isCartMessageVisible, handleCartClick } = useCart();
-  const { user, handleLogout } = useUserContext(); // Access user and logout function from context
+  const { user, handleLogout } = useUserContext();
+  const { cart } = useContext(CartContext);
 
-  // State to manage visibility of the logout button
   const [showLogout, setShowLogout] = useState(false);
 
   // Toggle visibility of the logout button
   const toggleLogout = () => setShowLogout((prev) => !prev);
 
+  // Calculate total number of items in the cart
+  const totalItemsInCart = cart.reduce(
+    (acc, product) => acc + (product.quantity || 0),
+    0
+  );
+
   return (
-    <nav className="bg-white border-b border-gray-300 py-4 px-6">
+    <nav className="sticky top-0 bg-black border-b border-gray-300 py-4 px-6 z-50 shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/">
-          <img
-            src="assets/images/logo1.png" // Replace with your logo URL
-            alt="Logo"
-            className="h-14 mr-6" // Adjust height as needed
-          />
+          <img src="assets/images/logo2.png" alt="Logo" className="h-14" />
         </Link>
 
         {/* Navigation Links */}
         <ul className="flex flex-grow space-x-8 mx-4">
           <li>
-            <Link to="/" className="text-gray-600 hover:text-gray-900">
+            <Link
+              to="/"
+              className="text-white text-xl hover:text-gray-400 transition"
+            >
               Home
             </Link>
           </li>
           <li>
-            <a href="#shop" className="text-gray-600 hover:text-gray-900">
+            <a
+              href="#shop"
+              className="text-white text-xl hover:text-gray-400 transition"
+            >
               Shop
             </a>
           </li>
           <li>
-            <a href="#product" className="text-gray-600 hover:text-gray-900">
+            <a
+              href="#service"
+              className="text-white text-xl hover:text-gray-400 transition"
+            >
+              Service
+            </a>
+          </li>
+          <li>
+            <a
+              href="#product"
+              className="text-white text-xl hover:text-gray-400 transition"
+            >
               Product
             </a>
           </li>
           <li>
-            <a href="#pages" className="text-gray-600 hover:text-gray-900">
-              Pages
-            </a>
-          </li>
-          <li>
-            <a href="#blog" className="text-gray-600 hover:text-gray-900">
+            <a
+              href="#blog"
+              className="text-white text-xl hover:text-gray-400 transition"
+            >
               Blog
             </a>
           </li>
           <li>
-            <a href="#element" className="text-gray-600 hover:text-gray-900">
-              Elements
+            <a
+              href="#instagram"
+              className="text-white text-xl hover:text-gray-400 transition"
+            >
+              Instagram
             </a>
           </li>
         </ul>
@@ -64,15 +83,15 @@ const Header = () => {
           {user ? (
             <div className="relative flex flex-col items-center">
               <span
-                className="text-gray-600 cursor-pointer"
-                onClick={toggleLogout} // Toggle the logout button visibility
+                className="text-white text-2xl font-semibold cursor-pointer hover:text-gray-300 transition"
+                onClick={toggleLogout}
               >
                 {user.firstname}
               </span>
               {showLogout && (
                 <button
                   onClick={handleLogout}
-                  className="text-gray-600 hover:text-gray-900 mt-2"
+                  className="absolute w-28 text-2xl top-full mt-6 bg-orange text-white font-semibold py-4 px-4 rounded-lg shadow-md hover:bg-green-600 transition"
                 >
                   Logout
                 </button>
@@ -80,41 +99,34 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-gray-600 hover:text-gray-900">
+              <Link
+                to="/login"
+                className="text-white text-2xl hover:text-gray-400 transition"
+              >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-white text-2xl hover:text-gray-400 transition"
               >
                 Register
               </Link>
             </>
           )}
-          <a
-            href="#cart"
-            onClick={(e) => {
-              e.preventDefault();
-              handleCartClick();
-            }}
-          >
+
+          {/* Cart Icon with Item Count */}
+          <Link to="/cart" className="relative text-white">
             <img
-              src="assets/images/icon-cart.svg" // Replace with your cart icon URL
+              src="assets/images/icon-cart.svg"
               alt="Cart"
-              className="w-6 h-6 mr-6" // Adjust width and height as needed
+              className="w-6 h-6 mr-6"
             />
-          </a>
-          {/* Empty Cart Message */}
-          {isCartMessageVisible && isCartEmpty && (
-            <div className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-lg">
-              <p className="text-center text-gray-600">Your cart is empty</p>
-            </div>
-          )}
-          <img
-            src="assets/images/image-avatar.png" // Replace with your user image URL
-            alt="User"
-            className="w-10 h-10 rounded-full border border-gray-300"
-          />
+            {totalItemsInCart > 0 && (
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                {totalItemsInCart}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
     </nav>

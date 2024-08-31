@@ -33,14 +33,21 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-lg -mt-16">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleSubmit}>
+    <div
+      className="relative flex justify-center items-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: 'url("assets/images/drilldown2.jpg")' }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="relative w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold mb-6 text-center text-black">
+          Login
+        </h2>
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-black font-semibold mb-2"
             >
               Email
             </label>
@@ -56,7 +63,7 @@ const Login = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-black font-semibold mb-2"
             >
               Password
             </label>
@@ -70,12 +77,20 @@ const Login = () => {
             />
           </div>
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-          <button
-            type="submit"
-            className="w-full bg-orange text-white font-semibold py-2 px-4 rounded-xl mt-4"
-          >
-            Login
-          </button>
+          <div className="w-full flex justify-center mt-4">
+            <button
+              type="submit"
+              className="bg-orange w-52 text-white font-semibold py-4 px-4 rounded-xl"
+            >
+              Login
+            </button>
+          </div>
+          <p className="text-center text-gray-600 mt-4">
+            New User?{" "}
+            <a href="/register" className="text-orange">
+              Register here
+            </a>
+          </p>
         </form>
       </div>
     </div>

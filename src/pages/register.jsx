@@ -33,12 +33,10 @@ const Register = () => {
     onSubmit: async (values) => {
       try {
         await axios.post(`${base_url}user/register`, values);
-        setMessage(
-          "Registration successful! Please check your email for verification."
-        );
+        setMessage("Registration successful! Redirecting to login...");
         setIsError(false);
         formik.resetForm();
-        setTimeout(() => navigate("/register"), 3000); // Redirect after 3 seconds
+        setTimeout(() => navigate("/login"), 3000); // Redirect after 3 seconds
       } catch (error) {
         setMessage(
           error.response?.data?.message ||
@@ -50,8 +48,13 @@ const Register = () => {
   });
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-lg -mt-16">
+    <div
+      className="relative flex justify-center items-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: 'url("assets/images/drilldown2.jpg")' }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="relative w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">

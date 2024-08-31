@@ -14,7 +14,7 @@ function InstagramSection() {
   ];
 
   return (
-    <div className="container mx-auto mt-10">
+    <div id="instagram" className="container mx-auto mt-10">
       <h2 className="text-2xl font-bold text-center py-6">
         Follow Us on Instagram
       </h2>

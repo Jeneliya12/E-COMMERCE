@@ -1,39 +1,22 @@
-import { createContext, useState, useContext } from "react";
+// CartContext.js
+import React, { createContext, useState } from "react";
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [isCartEmpty, setIsCartEmpty] = useState(true);
-  const [isCartMessageVisible, setIsCartMessageVisible] = useState(false);
+  const [cart, setCart] = useState([]);
 
-  const handleCartClick = () => {
-    setIsCartMessageVisible(true);
-    if (isCartEmpty) {
-      alert("Your cart is empty"); // You can replace this with a modal or other UI element
-    }
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
   };
 
-  const addItemToCart = () => {
-    setIsCartEmpty(false);
-  };
-
-  const hideCartMessage = () => {
-    setIsCartMessageVisible(false);
+  const removeFromCart = (index) => {
+    setCart((prevCart) => prevCart.filter((_, i) => i !== index));
   };
 
   return (
-    <CartContext.Provider
-      value={{
-        isCartEmpty,
-        isCartMessageVisible,
-        handleCartClick,
-        hideCartMessage,
-        addItemToCart,
-      }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
 };
-
-export const useCart = () => useContext(CartContext);

@@ -1,7 +1,10 @@
 import { Image } from "cloudinary-react";
 function MainSection() {
   return (
-    <div className="container mx-auto flex flex-col md:flex-row justify-center items-start space-x-4">
+    <div
+      id="shop"
+      className="container mx-auto flex flex-col md:flex-row justify-center items-start space-x-4"
+    >
       {/* Adjusted Image Size */}
       <div className="w-full md:w-1/3 h-custom-height relative mb-4 md:mb-0">
         <Image

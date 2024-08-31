@@ -2,6 +2,7 @@ function SignUpBanner() {
   return (
     <>
       <div
+        id="banner"
         className="relative py-24 px-10 bg-cover bg-center"
         style={{
           backgroundImage: `url('assets/images/banner.jpg')`,

@@ -1,6 +1,9 @@
 function Services() {
   return (
-    <div className="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-4 justify center gap-4">
+    <div
+      id="service"
+      className="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-4 justify center gap-4"
+    >
       {/* Free Shipping */}
       <div className="flex items-center p-4">
         <img
