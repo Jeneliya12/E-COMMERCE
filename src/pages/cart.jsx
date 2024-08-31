@@ -33,16 +33,18 @@ function Cart() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold">{product.title}</h3>
                 <p className="text-lg font-bold text-gray-800">
-                  ${product.price}
+                  ${product.price} x {product.quantity}
                 </p>
               </div>
-              <button
-                onClick={() => removeFromCart(index)}
-                className="text-red-500 hover:text-red-700 flex items-center"
-              >
-                <FaTrash size={20} />
-                <span className="ml-2">Remove</span>
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => removeFromCart(index)}
+                  className="text-red-500 hover:text-red-700 flex items-center"
+                >
+                  <FaTrash size={20} />
+                  <span className="ml-2">Remove</span>
+                </button>
+              </div>
             </div>
           ))}
           <button

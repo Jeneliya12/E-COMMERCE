@@ -1,28 +1,6 @@
 import { Image } from "cloudinary-react";
+import { blogPosts } from "../data/blogdata";
 function NewBlog() {
-  const blogPosts = [
-    {
-      images: "pexels-vitoriasantos-3002552_zothws",
-      title: "The Art of Minimalism",
-      description:
-        "Discover how to live more with less in our latest exploration of minimalist design and lifestyle choices.",
-      link: "#",
-    },
-    {
-      images: "pexels-lum3n-44775-322207_d1hngw",
-      title: "The Power of Neutrals",
-      description:
-        "Learn how to create versatile outfits with neutral tones that never go out of style.",
-      link: "#",
-    },
-    {
-      images: "cld-sample-3",
-      title: "Sustainable Fashion",
-      description:
-        "Explore eco-friendly fashion choices that help protect the environment while keeping you stylish.",
-      link: "#",
-    },
-  ];
   return (
     <div id="blog" className="container mx-auto mt-10">
       <h2 className="text-2xl font-bold text-center mb-6">New Blog Posts</h2>

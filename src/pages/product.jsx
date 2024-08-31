@@ -2,17 +2,38 @@ import React, { useContext, useState } from "react";
 import { Image } from "cloudinary-react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/cartcontext";
-import { FaRegHeart, FaEye, FaShoppingCart } from "react-icons/fa";
-import products from "../data/productdata";
+import { products } from "../data/productdata";
+import {
+  FaRegHeart,
+  FaEye,
+  FaShoppingCart,
+  FaPlus,
+  FaMinus,
+} from "react-icons/fa";
 
 function Product() {
   const { addToCart } = useContext(CartContext);
+  const [quantities, setQuantities] = useState(Array(products.length).fill(1)); // Initialize quantities array
   const [clicked, setClicked] = useState(null); // State to track the clicked product
   const navigate = useNavigate();
 
   const handleAddToCart = (product, index) => {
     setClicked(index); // Set the clicked state to the product index
-    addToCart(product);
+    addToCart({ ...product, quantity: quantities[index] }); // Pass the product with quantity to addToCart
+  };
+
+  const increaseQuantity = (index) => {
+    const newQuantities = [...quantities];
+    newQuantities[index] += 1;
+    setQuantities(newQuantities);
+  };
+
+  const decreaseQuantity = (index) => {
+    const newQuantities = [...quantities];
+    if (newQuantities[index] > 1) {
+      newQuantities[index] -= 1;
+    }
+    setQuantities(newQuantities);
   };
 
   return (
@@ -62,10 +83,29 @@ function Product() {
               <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
               <p className="text-gray-600 mb-2">{product.description}</p>
               <p className="text-lg font-bold mb-4">${product.price}</p>
+              <div className="flex items-center justify-center">
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => decreaseQuantity(index)}
+                    className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full"
+                  >
+                    <FaMinus />
+                  </button>
+                  <span className="text-lg font-semibold">
+                    {quantities[index]}
+                  </span>
+                  <button
+                    onClick={() => increaseQuantity(index)}
+                    className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full"
+                  >
+                    <FaPlus />
+                  </button>
+                </div>
+              </div>
             </div>
             <Link
               to={`/product/${index}`}
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 hover:underline mt-4 block"
             >
               View Details
             </Link>

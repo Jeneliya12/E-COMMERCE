@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import products from "../data/productdata";
+import { products } from "../data/productdata";
 import { Image } from "cloudinary-react";
 import { FaRegHeart, FaEye, FaShoppingCart } from "react-icons/fa";
 

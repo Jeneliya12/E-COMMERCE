@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../context/cartcontext";
 import { FaCreditCard, FaPaypal, FaGooglePay } from "react-icons/fa";
+import CreditCardModal from "../modal/creditcardmodal";
 import { AiOutlineCheckCircle } from "react-icons/ai"; // Confirmation icon
 
 function Checkout() {
@@ -12,6 +13,10 @@ function Checkout() {
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method);
     setSuccessMessage(""); // Clear message when payment method is changed
+
+    if (method === "Credit Card") {
+      setIsModalOpen(true); // Open the modal if the credit card is selected
+    }
   };
 
   const calculateTotal = () => {
@@ -26,8 +31,12 @@ function Checkout() {
   const handleConfirmOrder = () => {
     if (paymentMethod) {
       setSuccessMessage("Order placed successfully!");
-      setIsModalOpen(true);
     }
+  };
+
+  const handlePaymentSuccess = () => {
+    setSuccessMessage("Payment Successful!");
+    setIsModalOpen(false);
   };
 
   const closeModal = () => {
@@ -81,8 +90,8 @@ function Checkout() {
               onClick={() => handlePaymentMethodChange("Credit Card")}
               className={`flex items-center p-3 border rounded-lg ${
                 paymentMethod === "Credit Card"
-                  ? "border-blue-500 bg-blue-600"
-                  : "border-gray-300 hover:bg-red-500"
+                  ? "border-blue-500 bg-blue-600 text-white"
+                  : "border-gray-300 hover:bg-gray-100"
               }`}
             >
               <FaCreditCard size={24} className="mr-3" />
@@ -92,8 +101,8 @@ function Checkout() {
               onClick={() => handlePaymentMethodChange("PayPal")}
               className={`flex items-center p-3 border rounded-lg ${
                 paymentMethod === "PayPal"
-                  ? "border-blue-500 bg-green-600"
-                  : "border-gray-300 hover:bg--500"
+                  ? "border-blue-500 bg-green-600 text-white"
+                  : "border-gray-300 hover:bg-gray-100"
               }`}
             >
               <FaPaypal size={24} className="mr-3" />
@@ -103,8 +112,8 @@ function Checkout() {
               onClick={() => handlePaymentMethodChange("Google Pay")}
               className={`flex items-center p-3 border rounded-lg ${
                 paymentMethod === "Google Pay"
-                  ? "border-blue-500 bg-blue-600"
-                  : "border-gray-300 hover:bg-pink-500"
+                  ? "border-blue-500 bg-blue-600 text-white"
+                  : "border-gray-300 hover:bg-gray-100"
               }`}
             >
               <FaGooglePay size={24} className="mr-3" />
@@ -126,38 +135,21 @@ function Checkout() {
 
         {/* Success Message */}
         {successMessage && (
-          <div className="mt-6 text-center text-green-600 font-semibold">
-            {successMessage}
+          <div className="mt-6 text-center">
+            <div className="text-green-600 text-3xl font-semibold">
+              <AiOutlineCheckCircle className="inline mr-2" size={40} />
+              {successMessage}
+            </div>
           </div>
         )}
 
-        {/* Modal */}
+        {/* Credit Card Modal */}
         {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
-              {" "}
-              {/* Adjusted size */}
-              <div className="flex items-center justify-center mb-4">
-                <AiOutlineCheckCircle size={64} className="text-green-500" />{" "}
-                {/* Increased icon size */}
-              </div>
-              <h3 className="text-2xl font-semibold text-center mb-4">
-                {successMessage}
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                Thank you for your order! We are processing it and will send you
-                a confirmation email shortly.
-              </p>
-              <div className="text-center">
-                <button
-                  onClick={closeModal}
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
+          <CreditCardModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onPaymentSuccess={handlePaymentSuccess}
+          />
         )}
       </div>
     </div>

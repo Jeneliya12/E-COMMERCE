@@ -1,5 +1,4 @@
-// productData.js
-const products = [
+export const products = [
   {
     images: "drilldown_kplkyh", // Replace with actual image public IDs
     title: "Elegant Evening Dress",
@@ -29,7 +28,7 @@ const products = [
     price: "79.99",
   },
   {
-    images: "pexels-criativithy-894081-1805412_kdussc",
+    images: "pexels-kowalievska-1381556_tzloko",
     title: "Cozy Knit Sweater",
     description:
       "A warm and cozy knit sweater for those chilly days. Great for layering and staying stylish.",
@@ -57,5 +56,3 @@ const products = [
     price: "119.99",
   },
 ];
-
-export default products;

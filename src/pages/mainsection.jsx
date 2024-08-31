@@ -16,7 +16,7 @@ function MainSection() {
       </div>
 
       {/* Image Column with Large and Small Images */}
-      <div className="w-full md:w-1/2 flex flex-col space-y-4 py-10">
+      <div className="w-full md:w-1/2 flex flex-col space-y-4 py-14">
         <div className="relative w-full h-80">
           <Image
             alt="Large"
